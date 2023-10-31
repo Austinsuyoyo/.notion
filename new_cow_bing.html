@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountDown Timer</title>
+    <style>
+        body {
+            background-color: #191919;
+            color: #bab8b851;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        body {
+            margin: 0;
+        }
+
+        #timer {
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            text-transform: uppercase;
+            font-size: .7em;
+            letter-spacing: 5px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #compact {
+            text-transform: none;
+            font-size: .7em;
+        }
+
+        .years,
+        .months,
+        .weeks,
+        .days,
+        .hours,
+        .minutes,
+        .seconds {
+            padding: 20px 10px;
+        }
+
+        #years {
+            color: #ffffffa8;
+        }
+
+        #months {
+            color: #ffffffa8;
+        }
+
+        #weeks {
+            color: #ffffffa8;
+        }
+
+        #days {
+            color: #ffffffa8;
+        }
+
+        #hours {
+            color: #ffffffa8;
+        }
+
+        #minutes {
+            color: #ffffffa8;
+        }
+
+        #seconds {
+            color: #ffffffa8;
+        }
+
+        .nw-poweredby {
+            color: #37352F;
+            letter-spacing: normal;
+            z-index: 8;
+            align-self: center;
+            min-width: 90px;
+            order: 2;
+            min-height: 18px;
+            height: max-content;
+            flex-grow: 0;
+            flex-shrink: 0;
+            width: calc(100% - 20px);
+            margin: 10px 10px 10px;
+            padding-bottom: 30px;
+            white-space: pre-wrap;
+            overflow: visible;
+            word-break: break-word;
+            line-height: 1.5;
+            border-radius: 0px;
+            opacity: 1;
+            font-family: Helvetica;
+            font-size: 9px;
+            font-weight: 400;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .numbers {
+            font-weight: bold;
+            font-size: 3em;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="">
+    <div id="timer">
+        <!-- 
+        {{#if options.showYears}}
+        <div class="years">
+            <div id="years" class="numbers"></div>
+            {{#if options.compactStyle}}
+            {{else}}
+            years
+            {{/if}}
+        </div>
+        {{/if}}
+        -->
+        <div class="years">
+            <div id="years" class="numbers"></div>
+            years
+        </div>
+        <div class="months">
+            <div id="months" class="numbers"></div>
+            months
+        </div>
+        <!-- <div class="weeks">
+            <div id="weeks" class="numbers"></div>
+            weeks
+        </div> -->
+        <div class="days">
+            <div id="days" class="numbers"></div>
+            days
+        </div>
+        <!-- <div class="hours">
+            <div id="hours" class="numbers"></div>
+            hours
+        </div> -->
+        <!-- <div class="minutes">
+            <div id="minutes" class="numbers"></div>
+            minutes
+        </div> -->
+        <!-- <div class="seconds">
+            <div id="seconds" class="numbers"></div>
+            seconds
+        </div> -->
+    </div>
+</body>
+<script>
+
+    const year = new Date().getFullYear();
+    const myDate = new Date('2021-09-01T00:00:00.000Z');
+    const padLeft = (num) => {
+        if (String(num).length > 2) {
+            return num;
+        }
+        return String("00" + num).slice(-2);
+    }
+
+    setInterval(function () {
+        const today = new Date().getTime();
+        const diff = (today - myDate) < 0 ? 0 : (today - myDate);
+
+        const msecPerYears = 1000 * 60 * 60 * 24 * 7 * 4 * 12;
+        const msecPerMonths = 1000 * 60 * 60 * 24 * 7 * 4;
+        const msecPerWeeks = 1000 * 60 * 60 * 24 * 7;
+        const msecPerDays = 1000 * 60 * 60 * 24;
+        const msecPerHours = 1000 * 60 * 60;
+        const msecPerMinutes = 1000 * 60 * 60;
+        const msecPerSeconds = 1000 * 60;
+
+        const years = padLeft(Math.floor(diff / (msecPerYears)));
+        const months = padLeft(Math.floor((diff % (msecPerMonths * 12)) / msecPerMonths));
+        const weeks = padLeft(Math.floor((diff % (msecPerWeeks * 4)) / msecPerWeeks));
+        const days = padLeft(Math.floor((diff % (msecPerDays * 7)) / msecPerDays));
+        const hours = padLeft(Math.floor((diff % (msecPerHours * 24)) / (msecPerMinutes)));
+        const minutes = padLeft(Math.floor((diff % (msecPerMinutes)) / (msecPerSeconds)));
+        const seconds = padLeft(Math.floor((diff % (msecPerSeconds)) / 1000));
+
+        if (true) {
+            // document.getElementById("years").innerHTML = years + "<span style='text-transform: none;font-size:20px'>y</span>";
+            document.getElementById("years").innerHTML = years;
+        }
+
+        if (true) {
+            // document.getElementById("months").innerHTML = months + "<span style='text-transform: none;font-size:20px'>m</span>";
+            document.getElementById("months").innerHTML = months;
+        }
+
+        if (false) {
+            // document.getElementById("weeks").innerHTML = weeks + "<span style='text-transform: none;font-size:20px'>w</span>";
+            document.getElementById("weeks").innerHTML = weeks;
+        }
+
+        if (true) {
+            // document.getElementById("days").innerHTML = days + "<span style='text-transform: none;font-size:20px'>d</span>";
+            document.getElementById("days").innerHTML = days;
+        }
+
+        if (false) {
+            // document.getElementById("hours").innerHTML = hours + "<span style='text-transform: none;font-size:20px'>h</span>";
+            document.getElementById("hours").innerHTML = hours;
+        }
+
+        if (false) {
+            // document.getElementById("minutes").innerHTML = minutes + "<span style='text-transform: none;font-size:20px'>m</span>";
+            document.getElementById("minutes").innerHTML = minutes;
+        }
+
+        if (false) {
+            // document.getElementById("seconds").innerHTML = seconds + "<span style='text-transform: none;font-size:20px'>s</span>";
+            document.getElementById("seconds").innerHTML = seconds;
+        }
+    }, 1000);
+</script>
+</html>

@@ -151,8 +151,7 @@
 </body>
 <script>
 
-    const year = new Date().getFullYear();
-    const myDate = new Date('2021-09-01T00:00:00.000Z');
+    const myDate = new Date('2021-09-06T00:00:00.000Z').getTime();
     const padLeft = (num) => {
         if (String(num).length > 2) {
             return num;
@@ -164,21 +163,21 @@
         const today = new Date().getTime();
         const diff = (today - myDate) < 0 ? 0 : (today - myDate);
 
-        const msecPerYears = 1000 * 60 * 60 * 24 * 7 * 4 * 12;
-        const msecPerMonths = 1000 * 60 * 60 * 24 * 7 * 4;
-        const msecPerWeeks = 1000 * 60 * 60 * 24 * 7;
-        const msecPerDays = 1000 * 60 * 60 * 24;
-        const msecPerHours = 1000 * 60 * 60;
-        const msecPerMinutes = 1000 * 60 * 60;
-        const msecPerSeconds = 1000 * 60;
+        const msecPerYear = 1000 * 60 * 60 * 24 * 365.25;  // 考慮到閏年
+        const msecPerMonth = 1000 * 60 * 60 * 24 * 30.44;
+        const msecPerWeek = 1000 * 60 * 60 * 24 * 7;
+        const msecPerDay = 1000 * 60 * 60 * 24;
+        const msecPerHour = 1000 * 60 * 60;
+        const msecPerMinute = 1000 * 60;
+        const msecPerSecond = 1000;
 
-        const years = padLeft(Math.floor(diff / (msecPerYears)));
-        const months = padLeft(Math.floor((diff % (msecPerMonths * 12)) / msecPerMonths));
-        const weeks = padLeft(Math.floor((diff % (msecPerWeeks * 4)) / msecPerWeeks));
-        const days = padLeft(Math.floor((diff % (msecPerDays * 7)) / msecPerDays));
-        const hours = padLeft(Math.floor((diff % (msecPerHours * 24)) / (msecPerMinutes)));
-        const minutes = padLeft(Math.floor((diff % (msecPerMinutes)) / (msecPerSeconds)));
-        const seconds = padLeft(Math.floor((diff % (msecPerSeconds)) / 1000));
+        const years = padLeft(Math.floor(diff / (msecPerYear)));
+        const months = padLeft(Math.floor((diff % (msecPerMonth * 12)) / msecPerMonth));
+        const weeks = padLeft(Math.floor((diff % (msecPerWeek * 4)) / msecPerWeek));
+        const days = padLeft(Math.floor((diff % (msecPerDay * 7)) / msecPerDay));
+        const hours = padLeft(Math.floor((diff % (msecPerHour * 24)) / (msecPerMinute)));
+        const minutes = padLeft(Math.floor((diff % (msecPerMinute)) / (msecPerSecond)));
+        const seconds = padLeft(Math.floor((diff % (msecPerSecond)) / 1000));
 
         if (true) {
             // document.getElementById("years").innerHTML = years + "<span style='text-transform: none;font-size:20px'>y</span>";
